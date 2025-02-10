@@ -1,0 +1,131 @@
+.container{
+background-color: azure;
+width: 400px;
+padding: 25px 35px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform:
+translate(-50%,-50%);
+background:#ff f;
+border-radius: 10px;
+}
+{
+margin: 0;
+[10/02/25, 7:19:46 PM] TARA VILSAN: padding: 0;
+font-family: 'Poppins'
+,
+sans-serif;
+box-sizing: border-box;
+}
+.container button{
+width: 100%;
+height: 50px;
+background:#494eea;
+color: #ff f;
+border:0;
+outline:0;
+border-radius:5px;
+box-shadow: 0 10px 10px
+rgba(0,0,0,0.1);
+cursor: pointer;
+margin:20px 0;
+font-weight: 500;
+}
+.container input{
+width: 100%;
+height: 50px;
+border: 1px solid #494eea;
+outline: 0;
+padding: 10px;
+margin: 10px 0 20px;
+border-radius: 5px;
+ }
+.container p{
+font-weight: 600;
+font-size: 15px;
+margin-bottom: 8px;
+}
+body{
+background: #262a2f;
+}
+#imgBox{
+width: 200px;
+border-radius: 5px;
+max-height: 0;
+overflow: hidden;
+transition: max-height 2s;
+}
+#imgBox img{
+width: 100%;
+padding: 10px;
+}
+#imgBox.show-img{
+max-height: 300px;
+margin:10px auto;
+border:1px solid #d1d1d1
+}
+.error{
+animation:shake 0.1s linear 10
+}
+@keyframes shake{
+0%{
+transform: translateX(0);
+}25%{
+transform: translateX(-2px);
+}50%{
+ 75%{
+transform: translateX(0);
+}
+transform: translateX(0);
+}
+transform: translateX(2px);
+ let imgBox =
+document.getElementById("imgB
+ox");
+let qrImage =
+document.getElementById("qrIm
+age");
+let qrText =
+document.getElementById("qrTex
+t")
+async function generateQR() {
+if (qrText.value.length > 0) {
+qrImage.src = await
+"https://api.qrserver.com/v1/creat
+e-qr-code/?size=150x150&data="
++ qrText.value;
+imgBox.classList.add("showimg");
+}
+else {
+qrText.classList.add('error');
+setTimeout(() => {
+qrText.classList.remove('error')
+}, 1000)
+}
+}
+async function downloadQR() {
+if (qrText.value.length > 0) {
+qrImage.src =
+"https://api.qrserver.com/v1/creat
+e-qr-code/?size=150x150&data="
++ qrText.value;
+const response = await
+fetch(qrImage.src)
+const blob = await
+response.blob();
+const downloadLink =
+document.createElement("a")
+downloadLink.href =
+URL.createObjectURL(blob);
+downloadLink.download =
+"qrcode.jpg";
+downloadLink.click()
+}
+else {
+qrText.classList.add('error');
+setTimeout(() => {
+qrText.classList.remove('error')
+}, 1000)
+}
+}
